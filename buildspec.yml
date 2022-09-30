@@ -8,7 +8,7 @@ phases:
       - echo Logging in to Amazon ECR....
       - aws --version
       # login to Elastic container registry, make sure you specify the region
-      - eval $(aws ecr get-login) --region us-east-1 --no-include-email
+      - eval $(aws ecr get-login-password --region us-east-1 --no-include-email | sed 's|https://||')
       - REPOSITORY_URI=public.ecr.aws/g7k9x2u4/serenusai/docker-deploy-app
       #Specify the image tag
       - IMAGE_TAG=1.0
