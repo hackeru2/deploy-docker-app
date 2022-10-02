@@ -8,9 +8,9 @@ phases:
       - echo Logging in to Amazon ECR....
       - aws --version
       # login to Elastic container registry, make sure you specify the region
-      # - eval $(aws ecr-public get-login-password --region us-east-1 --no-include-email | sed 's|https://||')
+      - eval $(aws ecr-public get-login-password --region us-east-1 --no-include-email | sed 's|https://||')
       # - docker login --username AWS --password-stdin public.ecr.aws/g7k9x2u4
-      - docker login -u AWS -p $(aws ecr get-login-password --region us-east-1)
+      # - docker login -u AWS -p $(aws ecr get-login-password --region us-east-1)
 
       # - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g7k9x2u4
       - REPOSITORY_URI=serenusai/docker-deploy-app
