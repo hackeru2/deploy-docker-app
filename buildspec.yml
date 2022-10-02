@@ -8,7 +8,7 @@ phases:
       - echo Logging in to Amazon ECR....
       - aws --version
       # login to Elastic container registry, make sure you specify the region
-      - eval $( aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g7k9x2u4 --no-include-email | sed 's|https://||')
+      - eval $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g7k9x2u4 --no-include-email | sed 's|https://||')
       - REPOSITORY_URI=serenusai/docker-deploy-app
       #Specify the image tag
       - IMAGE_TAG=1.0
@@ -25,9 +25,10 @@ phases:
       - php artisan config:clear
       - php artisan migrate --force
       - echo Building the Docker image...
+      - docker build -t serenusai/docker-deploy-app .
       # - docker build -t $REPOSITORY_URI:latest vendor/laravel/sail/runtimes/8.1/.
-      - docker build -t $REPOSITORY_URI:latest .
-      - ./vendor/bin/sail up
+      # - docker build -t $REPOSITORY_URI:latest .
+      # - ./vendor/bin/sail up
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
