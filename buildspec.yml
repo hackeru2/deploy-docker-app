@@ -25,7 +25,7 @@ phases:
       - php artisan config:clear
       - php artisan migrate --force
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest vendor/laravel/sail/runtimes/8.1/Dockerfile
+      - docker build -t serenusai/docker-deploy-app/laravel/sail/runtimes/8.1/Dockerfile
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
